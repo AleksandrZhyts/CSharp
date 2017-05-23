@@ -43,11 +43,18 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="InitArrayByUser.cs" />
-    <Compile Include="InitArrayRandom.cs" />
+    <Compile Include="CountWords.cs" />
+    <Compile Include="InputDoubleData.cs" />
+    <Compile Include="InputIntData.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RunTask1.cs" />
+    <Compile Include="RunTask2.cs" />
+    <Compile Include="RunTask3.cs" />
+    <Compile Include="RunTask4.cs" />
+    <Compile Include="RunTask5.cs" />
+    <Compile Include="TwoArray.cs" />
+    <Compile Include="WorkWithString.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
