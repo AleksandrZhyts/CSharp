@@ -24,17 +24,13 @@ class CarPark
 
         Car.ShowOwner();
 
-        foreach (Car mashine in garage)
-        {
-            mashine.Print();
-            Console.WriteLine("-----------------------------------------------------------------------------");
-        }
-
         int price;
         foreach (Car mashine in garage)
         {
+            mashine.Print();
             mashine.Price(mashine.TypeCar, out price);
-            Console.WriteLine($"The cost of the trip on {mashine.TypeCar} per kilometr is {price} rub");  
+            Console.WriteLine($"The price is {price} rub per kilometr");
+            Console.WriteLine("-----------------------------------------------------------------------------");
         }
 
         int discont;

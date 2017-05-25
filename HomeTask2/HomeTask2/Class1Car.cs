@@ -46,8 +46,8 @@ partial class Car
 
     public TransportType TypeCar { get; set; } = TransportType.Sedan;
 
-    public Car() : this("Undefined brand", "Undefined color") { }
-    public Car(string brand) : this(brand, "Undefined color") { }
+    public Car() : this("Undefined brand", "Undefined color") {}
+    public Car(string brand) : this(brand, "Undefined color") {}
     public Car(string brand, string color)
     {
         _model = brand;
@@ -62,7 +62,7 @@ partial class Car
 
     public static void ShowOwner()
     {
-        Console.WriteLine($"Owner: {_owner}\tcompany: {_company}\n");
+        Console.WriteLine($"Company: {_company}\tOwner: {_owner}\n");
     }
 
     public void Init(short speed, TransportType trType, DateTime date, string typeFuel, byte numDoors )
@@ -77,8 +77,8 @@ partial class Car
     public void Print()
     {
         Console.Write($"Car: {_model}  {TypeCar}  {_color} ");
-        Console.Write($"{YearOfManufacture.ToLongDateString()} ");
-        Console.Write($"{TypeFuel} speed: {_maxSpeed}\n");
+        Console.Write($"{YearOfManufacture.ToLongDateString()} "); 
+         Console.Write($"{TypeFuel} speed: {_maxSpeed}\n");
     }
 
     public void Price(TransportType typeCar, out int price)
