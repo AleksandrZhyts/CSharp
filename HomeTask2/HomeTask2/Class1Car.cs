@@ -77,7 +77,7 @@ partial class Car
     public void Print()
     {
         Console.Write($"Car: {_model}  {TypeCar}  {_color} ");
-        Console.Write($"{YearOfManufacture.ToLongDateString()} "); 
+        Console.Write($"{YearOfManufacture.ToShortDateString()} "); 
          Console.Write($"{TypeFuel} speed: {_maxSpeed}\n");
     }
 
