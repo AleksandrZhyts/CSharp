@@ -78,7 +78,7 @@ partial class Car
     {
         Console.Write($"Car: {_model}  {TypeCar}  {_color} ");
         Console.Write($"{YearOfManufacture.ToShortDateString()} "); 
-         Console.Write($"{TypeFuel} speed: {_maxSpeed}\n");
+        Console.Write($"{TypeFuel} speed: {_maxSpeed}\n");
     }
 
     public void Price(TransportType typeCar, out int price)
