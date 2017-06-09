@@ -46,12 +46,12 @@ public class Tank
         return _nameTank;
     }
 
-    public void ShowTank()
+    public override string ToString()
     {
-        Console.Write($"{_nameTank} {{{GetAmmunition()}%,{GetArmor()}%,{GetManeuverability()}%}}");
+        return $"{_nameTank} {{{GetAmmunition()}%,{GetArmor()}%,{GetManeuverability()}%}}";
     }
 
-    public static bool operator ^(Tank tank1, Tank tank2)
+        public static bool operator ^(Tank tank1, Tank tank2)
     {
         return (tank1._levelAmmunition > tank2._levelAmmunition && tank1._levelArmor > tank2._levelArmor ||
                 tank1._levelAmmunition > tank2._levelAmmunition && tank1._levelManeuverability > tank2._levelManeuverability ||

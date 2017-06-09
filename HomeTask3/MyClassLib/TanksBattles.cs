@@ -51,44 +51,54 @@ public class TanksBattles
         }
     }
 
-    public void Battle(TanksBattles brigade1, TanksBattles brigade2)
+    public static bool operator *(TanksBattles brigade1, TanksBattles brigade2)
     {
+        int numberWinsBrigade1 = 0,
+            numberWinsBrigade2 = 0;
         try
         {
             for (int i = 0; i < brigade1.Length; i++)
             {
-                brigade1[i].ShowTank();
-                Console.Write(" : ");
-                brigade2[i].ShowTank();
+                Console.Write($"{brigade1[i]} : {brigade2[i]}");
 
                 if (brigade1[i] ^ brigade2[i])
                 {
                     Console.Write($" - win {brigade1[i].GetNameTank()}\n");
+                    numberWinsBrigade1++;
                 }
                 else
                     if (brigade2[i] ^ brigade1[i])
-                {
-                    Console.Write($" - win {brigade2[i].GetNameTank()}\n");
-                }
-                else Console.Write($" - the battle without winners\n");
+                    {
+                        Console.Write($" - win {brigade2[i].GetNameTank()}\n");
+                        numberWinsBrigade2++;
+                    }
+                    else Console.Write($" - the battle without winners\n");
             }
         }
         catch (Exception ex)
         {
             Console.WriteLine(ex.Message);
         }
+        return (numberWinsBrigade1 > numberWinsBrigade2) ? true : false;
     }
 
     public void TankOffensive(string nameBrigade1, string nameBrigade2)
     {
-            Random rand = new Random();
-            TanksBattles brigade1 = new TanksBattles(_countTanks),
-                         brigade2 = new TanksBattles(_countTanks);
+        Random rand = new Random();
+        TanksBattles brigade1 = new TanksBattles(_countTanks),
+                        brigade2 = new TanksBattles(_countTanks);
 
-            brigade1.Tuning(nameBrigade1, rand);
-            brigade2.Tuning(nameBrigade2, rand);
+        brigade1.Tuning(nameBrigade1, rand);
+        brigade2.Tuning(nameBrigade2, rand);
 
-            Battle(brigade1, brigade2);
+        if (brigade1 * brigade2)
+        {
+            Console.WriteLine($"\nBrigade \" {nameBrigade1}\" - winner!!!\n");
+        }
+        else
+        {
+            Console.WriteLine($"\nBrigade \" {nameBrigade2}\" - winner!!!\n");
+        }
     }
 }
 }
