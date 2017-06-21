@@ -8,7 +8,6 @@ namespace HomeTask4
 {
 class TeamLeader : IWorker
 {
-
     public string _name { get; set; }
 
     public TeamLeader(string name)

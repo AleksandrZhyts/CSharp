@@ -13,10 +13,10 @@ class Triangle
 
     public Triangle()
     {
-            arrayCoordinates = new double[size];// { 0, 0, 0, 0, 0, 0 };
+        arrayCoordinates = new double[size];
     }
 
-        public void InitTriangle()
+    public void InitTriangle()
     {
         for (int i = 0; i < size; i++)
         {
