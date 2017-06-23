@@ -8,12 +8,12 @@ namespace Lab5
 {
 public struct Point
 {
-    public int x;
-    public int y;
-    public Point(int _x, int _y)
+    public int _x;
+    public int _y;
+    public Point(int x, int y)
     {
-        x = _x;
-        y = _y;
+        _x = x;
+        _y = y;
     }
 }
 }

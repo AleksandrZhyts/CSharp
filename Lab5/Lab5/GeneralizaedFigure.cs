@@ -30,7 +30,6 @@ class GeneralizaedFigure
         EnumFiguresColors.ListFigures figures;
         for (int i = 0; i < NumbersFiguresList.LongCount(); i++)
         {
-            int x = NumbersFiguresList[i];
             figures = (EnumFiguresColors.ListFigures)Enum.GetValues(typeof(EnumFiguresColors.ListFigures)).GetValue(NumbersFiguresList[i]);  
             switch (figures)
             {
@@ -63,14 +62,11 @@ class GeneralizaedFigure
         for (int i = 0; i < _sizeArray; i++)
         {
             if (i < NumbersColorsList.LongCount())
-            {
                 color = (EnumFiguresColors.Color)Enum.GetValues(typeof(EnumFiguresColors.Color)).GetValue(NumbersColorsList[i]);                  
-            }
             else
-            {
-                color = (EnumFiguresColors.Color)Enum.GetValues(typeof(EnumFiguresColors.Color)).GetValue(NumbersColorsList[0]);
-            }
-            if (_arrayFigures[i].IsExist()) _arrayFigures[i].Draw((ConsoleColor)color);
+                color = (EnumFiguresColors.Color)Enum.GetValues(typeof(EnumFiguresColors.Color)).GetValue(NumbersColorsList[0]);           
+            if (_arrayFigures[i].IsExist())
+                    _arrayFigures[i].Draw((ConsoleColor)color);
             _arrayFigures[i].Print();
             Console.ReadKey();
         }
@@ -78,8 +74,8 @@ class GeneralizaedFigure
 
     private void MenuFigure()
     {
-        Console.WriteLine("Draw:\n\t0 - triangle\n\t1 - parallelogram\n\t2 - trapezium\n\t3 - rhombus\n\t4 - polygon");
-        Console.Write("Make a selection separated by a comma: ");
+        Console.Write("Draw:\n\t0 - triangle\n\t1 - parallelogram\n\t2 - trapezium\n\t3 - rhombus\n\t4 - polygon\n" + 
+                      "Make a selection separated by a comma: ");
         string[] arrayChars = Console.ReadLine().Split(",. ".ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
         foreach (string choiseChar in arrayChars)
         {
@@ -88,14 +84,14 @@ class GeneralizaedFigure
                 throw new ArgumentException("Argument invalid!");
             else
                 if ((choiseInt >= 0) && (choiseInt < 5)) NumbersFiguresList.Add(choiseInt);
-                else NumbersFiguresList.Add(1);
+                else NumbersFiguresList.Add(0);
         }
     }
 
     private void MenuColor()
     {
-        Console.WriteLine("Colors:\n\t0 - gray\n\t1 - blue\n\t2 - green\n\t3 - red\n\t4 - yellow\n\t5 - white");
-        Console.Write("Make a selection separated by a comma: ");
+        Console.Write("Colors:\n\t0 - gray\n\t1 - blue\n\t2 - green\n\t3 - red\n\t4 - yellow\n\t5 - white\n"  +
+                      "Make a selection separated by a comma: ");
         string[] arrayChars = Console.ReadLine().Split(",. ".ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
         foreach (string choiseChar in arrayChars)
         {
@@ -104,7 +100,7 @@ class GeneralizaedFigure
                 throw new ArgumentException("Argument invalid!");
             else
                 if ((choiseInt >= 0) && (choiseInt < 6)) NumbersColorsList.Add(choiseInt);
-            else NumbersColorsList.Add(1);
+            else NumbersColorsList.Add(0);
         }
     }
 }
