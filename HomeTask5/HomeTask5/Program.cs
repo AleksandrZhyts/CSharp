@@ -15,10 +15,7 @@ class Program
                                  new Truck("Truck: Volvo", "27", 140),
                                  new LightCar("Light car: Honda", "49", 280)};
         var taskRace = new Race(cars, 4);
-        taskRace.getStart();
-        taskRace.startRace();
         taskRace.CurrentStateRace();
-        taskRace.Rewording();      
     }
 }
 }

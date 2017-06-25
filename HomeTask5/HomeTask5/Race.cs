@@ -73,11 +73,12 @@ class Race
             if (_cars[i] is Truck)
                 Console.WriteLine($" - current position: {_numberCars - i}\nDistance traveled: {(_cars[i] as Truck).GetDistanceCurrent:F2}");
         }
+        Console.WriteLine("\nPlease, press any key to continue...\n");
         Console.ReadKey();
         Console.Clear();
     }
 
-    public void CheckResult()
+    private void CheckResult()
     {
         foreach (Car car in _cars)
         {
@@ -111,6 +112,8 @@ class Race
 
     public void CurrentStateRace()
     {
+        getStart();
+        startRace();
         int step = 0;
         Console.WriteLine("\n\nRace is start:");
         while (!isFinish)
@@ -122,9 +125,10 @@ class Race
             }
             CheckResult();
         }
+        Rewording();
     }
 
-    public void Rewording()
+    private void Rewording()
     {
         BubbleSorter.Sort(_cars, new Comparer(CarsDistanceComparer));
         Console.Clear();
