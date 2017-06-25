@@ -29,13 +29,6 @@ class Bus : Car
 
     int speedCurrent { get; set; }
     bool isFinish = false;
-    public bool IsFinish
-    {
-        get
-        {
-            return isFinish;
-        }
-    }
         
     public Bus(string type, string number, int speed) : base(type, speed)
     {

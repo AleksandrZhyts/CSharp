@@ -26,16 +26,10 @@ class SportCar : Car
             return distanceCurrent;
         }
     }
+
     int speedCurrent { get; set; }
     bool isFinish = false;
-    public bool IsFinish
-    {
-        get
-        {
-            return isFinish;
-        }
-    }
-
+ 
     public SportCar(string type, string number, int speed) : base(type, speed)
     {
         _number = number;

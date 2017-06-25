@@ -26,15 +26,9 @@ class LightCar : Car
             return distanceCurrent;
         }
     }
+
     int speedCurrent { get; set; }
     bool isFinish = false;
-    public bool IsFinish
-    {
-        get
-        {
-            return isFinish;
-        }
-    }
 
     public LightCar(string type, string number, int speed) : base(type, speed)
     {
