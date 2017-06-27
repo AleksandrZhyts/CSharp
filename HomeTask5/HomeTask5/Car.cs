@@ -10,6 +10,7 @@ abstract class Car
 {
     public int _speed { get; set; }
     public string _type { get; set; }
+    public Random rand = new Random(Guid.NewGuid().GetHashCode());
 
     public Car(string type, int speed)
     {
@@ -18,6 +19,11 @@ abstract class Car
     }
 
     public abstract void Move();
+
+    public virtual void GetOffToStart()
+    {
+        ShowCar();
+    }
 
     public virtual void ShowCar()
     {

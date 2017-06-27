@@ -35,23 +35,22 @@ class LightCar : Car
         _number = number;
     }
 
-    public void GetOffToStart()
+    public override void GetOffToStart()
     {
         ShowCar();
-    }
-
-    public override void Move()
-    {
-        Random rand = new Random(Guid.NewGuid().GetHashCode());
-        speedCurrent = rand.Next(0, _speed);
-        distanceCurrent += speedCurrent * ConstValues.TimeInterval;
-        if (distanceCurrent >= ConstValues.Distance) isFinish = true;
     }
 
     public void StartRace()
     {
         distanceCurrent = 0;
         speedCurrent = 0;
+    }
+
+    public override void Move()
+    {
+        speedCurrent = rand.Next(0, _speed);
+        distanceCurrent += speedCurrent * ConstValues.TimeInterval;
+        if (distanceCurrent >= ConstValues.Distance) isFinish = true;
     }
 
     public override void ShowCar()
