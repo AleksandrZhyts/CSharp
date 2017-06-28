@@ -60,7 +60,7 @@ class DemoWorkWithNotebook
         {
             book.ShowNode(i);
         }
-
+        Console.WriteLine("Please, press any key");
         Console.ReadKey();
         Console.Clear();
         book[2] = note4;
@@ -70,6 +70,9 @@ class DemoWorkWithNotebook
         {
             book.ShowNode(i);
         }
+        Console.WriteLine("Please, press any key");
+        Console.ReadKey();
+        Console.Clear();
     }
 }
 }

@@ -39,7 +39,9 @@ public struct Note
 
 class Notebook : IEnumerable
 {
-    ArrayList book; 
+    ArrayList book;
+    public Dictionary<int, string> KeysSearchList = new Dictionary<int, string>();
+    public List<int> ListIndexResult = new List<int>();
 
     public Notebook()
     {
@@ -97,9 +99,6 @@ class Notebook : IEnumerable
     {     
         book.Remove(note);  
     }
-
-    public Dictionary<int,string> KeysSearchList = new Dictionary<int, string>();
-    public List<int> ListIndexResult = new List<int>();
 
     private void MenuSearch()
     {
@@ -168,7 +167,7 @@ class Notebook : IEnumerable
                         break;
                     case 5:
                         if (string.Compare(((Note)book[index]).Phone, p.Value) == 0 && ListIndexResult.BinarySearch(index) < 0)
-                             ListIndexResult.Add(index);
+                                ListIndexResult.Add(index);
                         break;
                 }
                 index++;
@@ -190,7 +189,7 @@ class Notebook : IEnumerable
 
     public void Sort()
     {
-        book.Sort(new NotesComparer());  //chek without class
+        book.Sort(new NotesComparer());
     }
 
     public IEnumerator GetEnumerator()
