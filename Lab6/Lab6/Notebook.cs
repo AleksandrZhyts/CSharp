@@ -98,8 +98,8 @@ class Notebook : IEnumerable
         book.Remove(note);  
     }
 
-    Dictionary<int,string> KeysSearchList = new Dictionary<int, string>();
-    List<int> ListIndexResult = new List<int>();
+    public Dictionary<int,string> KeysSearchList = new Dictionary<int, string>();
+    public List<int> ListIndexResult = new List<int>();
 
     private void MenuSearch()
     {
@@ -141,6 +141,7 @@ class Notebook : IEnumerable
 
     public bool Search()
     {
+        MenuSearch();
         if (KeysSearchList.Count == 0) return false;       
         foreach (KeyValuePair<int, string> p in KeysSearchList)
         {
@@ -150,64 +151,30 @@ class Notebook : IEnumerable
                 switch (p.Key)
                 {
                     case 1:
-                        if (string.Compare(((Note)book[index]).LastName, p.Value) == 0)
-                        {
-                            if (ListIndexResult.BinarySearch(index) < 0)
-                                ListIndexResult.Add(index);
-                        }
+                        if (string.Compare(((Note)book[index]).LastName, p.Value) == 0 && ListIndexResult.BinarySearch(index) < 0)
+                            ListIndexResult.Add(index);
                         break;
                     case 2:
-                        if (string.Compare(((Note)book[index]).Name, p.Value) == 0)
-                        {
-                            if (ListIndexResult.BinarySearch(index) < 0)
-                                ListIndexResult.Add(index);
-                        }
+                        if (string.Compare(((Note)book[index]).Name, p.Value) == 0 && ListIndexResult.BinarySearch(index) < 0)
+                             ListIndexResult.Add(index);
                         break;
                     case 3:
-                        if (string.Compare(((Note)book[index]).Birthday.ToShortDateString(), p.Value) == 0)
-                        {
-                            if (ListIndexResult.BinarySearch(index) < 0)
-                                ListIndexResult.Add(index);
-                        }
+                        if (string.Compare(((Note)book[index]).Birthday.ToShortDateString(), p.Value) == 0 && ListIndexResult.BinarySearch(index) < 0)
+                            ListIndexResult.Add(index);
                         break;
                     case 4:
-                        if (string.Compare(((Note)book[index]).Email, p.Value) == 0)
-                        {
-                            if (ListIndexResult.BinarySearch(index) < 0)
-                                ListIndexResult.Add(index);
-                        }
+                        if (string.Compare(((Note)book[index]).Email, p.Value) == 0 && ListIndexResult.BinarySearch(index) < 0)
+                            ListIndexResult.Add(index);
                         break;
                     case 5:
-                        if (string.Compare(((Note)book[index]).Phone, p.Value) == 0)
-                        {
-                            if (ListIndexResult.BinarySearch(index) < 0)
-                                ListIndexResult.Add(index);
-                        }
+                        if (string.Compare(((Note)book[index]).Phone, p.Value) == 0 && ListIndexResult.BinarySearch(index) < 0)
+                             ListIndexResult.Add(index);
                         break;
                 }
                 index++;
             }
         }
         return (ListIndexResult.Count != 0); 
-    }
-
-    public void ResultSearch()
-    {
-        MenuSearch();
-        if (Search())
-        {
-            Console.WriteLine("Search results:");
-            foreach (int index in ListIndexResult)
-            {
-                ShowNode(index);
-            }
-            ListIndexResult.Clear();
-            KeysSearchList.Clear();
-        }
-        else
-        {
-            Console.WriteLine("Entries with such fields are not in the address book");
-        }
     }
 
     public void ShowNode(int index)
