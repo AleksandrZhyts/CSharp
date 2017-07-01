@@ -20,6 +20,8 @@ abstract class Car
 
     public abstract void Move();
 
+    public abstract void RaceFinish();
+
     public virtual void GetOffToStart()
     {
         ShowCar();

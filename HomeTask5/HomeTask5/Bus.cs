@@ -10,7 +10,7 @@ class Bus : Car
 {
     public event EventHandler Finish;
     
-    public void RaceFinish()
+    public override void RaceFinish()
     {
          if ((isFinish == true) && Finish != null)
                 Finish(this, EventArgs.Empty);
@@ -56,7 +56,7 @@ class Bus : Car
     public override void ShowCar()
     {
         base.ShowCar();
-        Console.Write($" number: {_number}");
+        Console.Write($" number {_number}");
     }
 }
 }

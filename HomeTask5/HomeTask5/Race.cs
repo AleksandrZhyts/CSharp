@@ -68,31 +68,19 @@ class Race : IEnumerable, ICloneable
     {
         foreach (Car car in _cars)
         {
+            car.RaceFinish();
             if (car is Bus)
-            {
-                ((Bus)car).Finish += delegate (object sender, EventArgs e) 
-                { isFinish = true; };
-                ((Bus)car).RaceFinish();
-            }
-
+                ((Bus)car).Finish += delegate (object sender, EventArgs e)
+                                     { isFinish = true; };
             if (car is SportCar)
-            {
                 ((SportCar)car).Finish += delegate (object sender, EventArgs e) 
-                { isFinish = true; };
-                ((SportCar)car).RaceFinish();
-            }
+                                          { isFinish = true; };
             if (car is LightCar)
-            {
                 ((LightCar)car).Finish += delegate (object sender, EventArgs e) 
-                { isFinish = true; };
-                ((LightCar)car).RaceFinish();
-            }
+                                          { isFinish = true; };
             if (car is Truck)
-            {
                 ((Truck)car).Finish += delegate (object sender, EventArgs e) 
-                { isFinish = true; };
-                ((Truck)car).RaceFinish();
-            }
+                                       { isFinish = true; };
         }
     }
 
