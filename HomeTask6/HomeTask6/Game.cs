@@ -21,10 +21,7 @@ class Game
     {
         Coloda = new List<Karta>(36);
         InitColoda();
-
-        if (numberPlayers < 2) NumberPlayers = 2;
-        else NumberPlayers = numberPlayers;
-
+        NumberPlayers = (numberPlayers < 2) ? 2 : numberPlayers;
         GameTable = new List<Player>(NumberPlayers);
         InitGameTable();
     }
@@ -72,6 +69,18 @@ class Game
         }
     }
 
+    private void FindStrongerKart(out int indexPlayer)
+    {
+        indexPlayer = 0;
+        for (int i = 0; i < GameTable.Count; i++)
+        {
+            if (GameTable[indexPlayer].OpenKart().Comparer(GameTable[i].OpenKart()) == -1)
+            {
+                indexPlayer = i;
+            }
+        }
+    }
+
     private void WhoLost()
     {
         for (int i = 0; i < GameTable.Count; i++)
@@ -80,6 +89,7 @@ class Game
             {
                 Console.WriteLine($"{GameTable[i].Name} is lost");
                 GameTable.RemoveAt(i);
+                i--;
             }
         }
         isGameOver = (GameTable.Count == 1);
@@ -99,18 +109,6 @@ class Game
             WhoLost();
         }
         Rewarding();
-    }
-
-    private void FindStrongerKart(out int indexPlayer)
-    {
-        indexPlayer = 0;
-        for (int i = 0; i < GameTable.Count; i++)
-        {
-            if (GameTable[indexPlayer].OpenKart().Comparer(GameTable[i].OpenKart()) == -1)
-            {
-                indexPlayer = i;
-            }
-        }
     }
 
     private void Rewarding()
