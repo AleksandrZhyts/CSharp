@@ -6,8 +6,6 @@ using System.Text;
 using System.Threading.Tasks;
 using static HomeTask6.EnumCart;
 
-//Вывод результатов игры и победителя
-
 namespace HomeTask6
 {
 class Game
@@ -40,8 +38,9 @@ class Game
     private void ShuffleColoda()
     {
         Random rand = new Random(Guid.NewGuid().GetHashCode());
-        int index;
-        for (int j = 0; j < 2; j++)
+        int index,
+            timesToShuffle = 2;
+        for (int j = 0; j < timesToShuffle; j++)
         {
             for (int i = 0; i < 36; i++)
             {
@@ -57,13 +56,13 @@ class Game
     {
         ShuffleColoda();
         int amountKarts = Coloda.Count / NumberPlayers,
-            index = 0;
+            indexKart = 0;
         for (int i = 0; i < NumberPlayers; i++)
         {
             Queue<Karta> set = new Queue<Karta>(amountKarts);
             for (int j = 0; j < amountKarts; j++)
             {
-                set.Enqueue(Coloda[index++]);
+                set.Enqueue(Coloda[indexKart++]);
             }
             GameTable.Add(new Player(set, "number " + (i + 1).ToString()));
         }
@@ -88,8 +87,7 @@ class Game
             if (GameTable[i].isLost == true)
             {
                 Console.WriteLine($"{GameTable[i].Name} is lost");
-                GameTable.RemoveAt(i);
-                i--;
+                GameTable.RemoveAt(i--);
             }
         }
         isGameOver = (GameTable.Count == 1);
