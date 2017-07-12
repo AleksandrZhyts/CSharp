@@ -1,9 +1,5 @@
 ﻿using System;
 using System.IO;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Lab7
 {
@@ -11,7 +7,6 @@ class WorkWithReadWriteFile
 {
     public void StartWork()
     {
-        string filePath = @"d:\Day17.txt";  //Console.ReadLine();
         while (true)
         {
             Console.WriteLine("\t1 - Записать файл\n\t2 - Прочитать файл\n\tq - Выход");
@@ -19,13 +14,14 @@ class WorkWithReadWriteFile
             var answer = Console.ReadLine();
             if (!int.TryParse(answer, out choise))            
                 break;          
-            switch(choise)
+            switch (choise)
             {
                 case 1:
                     try
                     {
                         try
                         {
+                            string filePath = @"d:\Day17.txt";  //Console.ReadLine();
                             FileStream fs = new FileStream(filePath, FileMode.CreateNew, FileAccess.Write, FileShare.Write);
                             using (ReadWriteFile runTask = new ReadWriteFile(fs, false))
                             {
@@ -48,6 +44,7 @@ class WorkWithReadWriteFile
                     {
                         try
                         {
+                            string filePath = @"d:\Day17.txt";  //Console.ReadLine();
                             FileStream fs = new FileStream(filePath, FileMode.Open, FileAccess.Read, FileShare.Read);
                             using (ReadWriteFile runTask = new ReadWriteFile(fs, true))
                             {
@@ -65,13 +62,12 @@ class WorkWithReadWriteFile
                         Console.WriteLine(e.Message);
                     }
                     break;
-
-                    default: return;
+                    default:
+                        return;
             }
             Console.ReadKey();
             Console.Clear();
         }
-
     }
 }
 }

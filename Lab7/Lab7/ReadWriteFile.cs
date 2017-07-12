@@ -1,20 +1,18 @@
 ﻿using System;
 using System.IO;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Lab7
 {
 class ReadWriteFile : IDisposable
 {
     #region Fields
-        private Stream _resource;
-        private bool _disposed;
-        public string FIO { get; set; } = "Иванов Иван Иванович";
-        public DateTime BirthDay { get; set; } = new DateTime(1995, 10, 15);
-        //bool endOfStream = _resource.Position == _resource.Length; //
+
+    private Stream _resource;
+    private bool _disposed;
+    public string FIO { get; set; } = "Иванов Иван Иванович";
+    public DateTime BirthDay { get; set; } = new DateTime(1995, 10, 15);
+    //bool endOfStream = _resource.Position == _resource.Length; 
+
     #endregion
 
     public ReadWriteFile(Stream stream, bool flagReadWrite)
@@ -22,9 +20,9 @@ class ReadWriteFile : IDisposable
         if (stream == null)
             throw new ArgumentNullException("Поток null.");
         if (flagReadWrite && !stream.CanRead)
-            throw new ArgumentException("Поток должен быть" + "доступен для чтения.");
+            throw new ArgumentException("Поток должен быть доступен для чтения.");
         if (!flagReadWrite && !stream.CanWrite)
-            throw new ArgumentException("Поток должен быть" + "доступен для записи.");
+            throw new ArgumentException("Поток должен быть доступен для записи.");
         this._resource = stream;
         this._disposed = false;
     }
@@ -82,17 +80,17 @@ class ReadWriteFile : IDisposable
     }
 
     #region IDisposable Members
-        public void Dispose()
-        {
-            this.Dispose(true);
-            // Необходимо использовать SupressFinalize, чтобы не выполнять финализацию после явного освобождения ресурсов
-            GC.SuppressFinalize(this);
-        }
+
+    public void Dispose()
+    {
+        this.Dispose(true);
+        // Необходимо использовать SupressFinalize, чтобы не выполнять финализацию после явного освобождения ресурсов
+        GC.SuppressFinalize(this);
+    }
+
     #endregion
 
-    /// <summary>
-    /// Финализатор
-    /// </summary>
+    // Финализатор
     ~ReadWriteFile()
     {
         this.Dispose(false);
