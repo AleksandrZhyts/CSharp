@@ -46,7 +46,9 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ReadWriteFile.cs" />
+    <Compile Include="TransformFile.cs" />
     <Compile Include="WorkWithReadWriteFile.cs" />
+    <Compile Include="WorkWithTransformFile.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
