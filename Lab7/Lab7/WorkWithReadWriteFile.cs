@@ -7,7 +7,7 @@ class WorkWithReadWriteFile
 {
     public void StartWork()
     {
-        while (true)
+       while (true)
         {
             Console.WriteLine("\t1 - Записать файл\n\t2 - Прочитать файл\n\tq - Выход");
             int choise;
@@ -22,8 +22,8 @@ class WorkWithReadWriteFile
                         try
                         {
                             string filePath = @"d:\Day17.txt";  //Console.ReadLine();
-                            FileStream fs = new FileStream(filePath, FileMode.CreateNew, FileAccess.Write, FileShare.Write);
-                            using (ReadWriteFile runTask = new ReadWriteFile(fs, false))
+                            FileStream fs = new FileStream(filePath, FileMode.CreateNew, FileAccess.Write, FileShare.Write);                             
+                            using (ReadWriteFile runTask = new ReadWriteFile(fs))
                             {
                                 runTask.WriteToFile();
                             }
@@ -46,10 +46,9 @@ class WorkWithReadWriteFile
                         {
                             string filePath = @"d:\Day17.txt";  //Console.ReadLine();
                             FileStream fs = new FileStream(filePath, FileMode.Open, FileAccess.Read, FileShare.Read);
-                            using (ReadWriteFile runTask = new ReadWriteFile(fs, true))
+                            using (ReadWriteFile runTask = new ReadWriteFile(fs))
                             {
-                                runTask.ReadFromFile();
-                                
+                                runTask.ReadFromFile();                             
                             }
                         }
                         catch

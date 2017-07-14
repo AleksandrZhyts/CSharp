@@ -14,14 +14,12 @@ class ReadWriteFile : IDisposable
 
     #endregion
 
-    public ReadWriteFile(Stream stream, bool flagReadWrite)
+    public ReadWriteFile(Stream stream)
     {
         if (stream == null)
             throw new ArgumentNullException("Поток null.");
-        if (flagReadWrite && !stream.CanRead)
-            throw new ArgumentException("Поток должен быть доступен для чтения.");
-        if (!flagReadWrite && !stream.CanWrite)
-            throw new ArgumentException("Поток должен быть доступен для записи.");
+        if (!stream.CanRead && !stream.CanWrite)
+            throw new ArgumentException("Поток должен быть доступен для данной операции.");
         this._resource = stream;
         this._disposed = false;
     }
@@ -30,29 +28,29 @@ class ReadWriteFile : IDisposable
     {
         if (_disposed)
             throw new ObjectDisposedException("Ресурс был освобожден.");
-        using (BinaryWriter bw = new BinaryWriter(_resource))
+        using (StreamWriter sw = new StreamWriter(_resource))
         {
-            bw.Write(FIO + " " + BirthDay.ToShortDateString());
+            sw.WriteLine(FIO + " " + BirthDay.ToShortDateString());
             Random rand = new Random(Guid.NewGuid().GetHashCode());
             int col = rand.Next(1, 10),
                 row = rand.Next(1, 10);
-            bw.Write(col.ToString() + " " + row.ToString());
+            sw.WriteLine(col.ToString() + " " + row.ToString());
 
             for (int i = 0; i < col * row; i++)
             {
-                bw.Write(rand.Next(0, 200) * 0.35);
+                sw.WriteLine(rand.Next(0, 200) * 0.35);
             }
             col = rand.Next(1, 10);
             row = rand.Next(1, 10);
-            bw.Write(col.ToString() + " " + row.ToString());
+            sw.WriteLine(col.ToString() + " " + row.ToString());
             string elemArrayInt = "";
             for (int i = 0; i < col * row; i++)
             {
                 elemArrayInt += (rand.Next(0, 200).ToString() + " ");
             }
-            bw.Write(elemArrayInt);
-            bw.Write(DateTime.Now.ToShortDateString());
-            bw.Flush();
+            sw.WriteLine(elemArrayInt);
+            sw.WriteLine(DateTime.Now.ToShortDateString());
+            sw.Flush();
         }
     }
 
@@ -61,24 +59,24 @@ class ReadWriteFile : IDisposable
         if (_disposed)
             throw new ObjectDisposedException("Ресурс был освобожден.");
         _resource.Seek(0, SeekOrigin.Begin);
-        using (BinaryReader br = new BinaryReader(_resource))
+        using (StreamReader sr = new StreamReader(_resource))
         {
-            string[] arrayWords = br.ReadString().Split(" ".ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
+            string[] arrayWords = sr.ReadLine().Split(" ".ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
             Console.WriteLine($"FIO: {arrayWords[0] + " " + arrayWords[1] + " " + arrayWords[2]}" + $"\nBirthDay: {arrayWords[3]}");
-            arrayWords = br.ReadString().Split(" ".ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
+            arrayWords = sr.ReadLine().Split(" ".ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
             int col = Convert.ToInt32(arrayWords[0]),
                 row = Convert.ToInt32(arrayWords[1]);
             Console.WriteLine($"Column double array: {col}" + $"\nRow double array: {row}" + "\nDouble elements:");
             for (int i = 0; i < col * row; i++)
             {
-                Console.WriteLine(br.ReadDouble());
+                Console.WriteLine(Convert.ToDouble(sr.ReadLine()));
             }
-            arrayWords = br.ReadString().Split(" ".ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
+            arrayWords = sr.ReadLine().Split(" ".ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
             Console.WriteLine($"Column integer array: {arrayWords[0]}" +
                                 $"\nRow integer array: {arrayWords[1]}" +
                                 "\nInteger elements:\n" +
-                                br.ReadString() +
-                                $"\nCurrent date: {br.ReadString()}");
+                                sr.ReadLine() +
+                                $"\nCurrent date: {sr.ReadLine()}");
         }
     }
 

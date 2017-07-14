@@ -3,47 +3,59 @@ using System.IO;
 
 namespace Lab7
 {
-class TransformFile
+class TransformFile : IDisposable
 {
-    public void ReadFromFileToTransform(string filePath, out string textForOldFile, out string textForNewFile)
+    #region Fields
+
+    private StreamReader _resource;
+    private bool _disposed;
+
+    #endregion
+
+    public TransformFile(StreamReader stream)
     {
-        using (StreamReader file = new StreamReader(filePath))
+        if (stream == null)
+            throw new ArgumentNullException("Поток null.");
+        this._resource = stream;
+        this._disposed = false;
+    }
+
+    public void ReadFromFileToTransform(out string textForOldFile, out string textForNewFile)
+    {
+        string line;
+        textForOldFile = textForNewFile = "";
+        while ((line = _resource.ReadLine()) != null)
         {
-            string line;
-            textForOldFile = textForNewFile = "";
-            while ((line = file.ReadLine()) != null)
+            string[] arrayWords = line.Split(" \t".ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
+            string temp = "";
+            foreach (string word in arrayWords)
             {
-                string[] arrayWords = line.Split(" \t".ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
-                string temp = "";
-                foreach (string word in arrayWords)
+                if (word.CompareTo("public") == 0)
                 {
-                    if (word.CompareTo("public") == 0)
+                    textForOldFile += "private ";
+                    temp  += "private ";
+                }
+                else
+                {
+                    if (word.Length > 2)
                     {
-                        textForOldFile += "private ";
-                        temp  += "private ";
+                        textForOldFile += word.ToLower() + " ";
+                        temp += word.ToLower() + " ";
                     }
                     else
                     {
-                        if (word.Length > 2)
-                        {
-                            textForOldFile += word.ToLower() + " ";
-                            temp += word.ToLower() + " ";
-                        }
-                        else
-                        {
-                            textForOldFile += word + " ";
-                            temp += word + " ";
-                        }
+                        textForOldFile += word + " ";
+                        temp += word + " ";
                     }
-                }    
-                char[] charArray = temp.ToCharArray();
-                Array.Reverse(charArray);
-                textForNewFile += new string(charArray) + "\n";
-                textForOldFile += "\n";
-            }
-            file.Close();
+                }
+            }    
+            char[] charArray = temp.ToCharArray();
+            Array.Reverse(charArray);
+            textForNewFile += new string(charArray) + "\n";
+            textForOldFile += "\n";
         }
-    }
+        _resource.Close();
+   }
 
     public void WriteToFileAfterTransform(string filePath, string text)
     {
@@ -51,7 +63,36 @@ class TransformFile
         {
             file.Write(text);
             file.Flush();
-            file.Close();
+        }
+    }
+
+    #region IDisposable Members
+
+    public void Dispose()
+    {
+        this.Dispose(true);
+        GC.SuppressFinalize(this); // чтобы не выполнять финализацию после явного освобождения ресурсов
+    }
+
+    #endregion
+
+    ~TransformFile()   // Финализатор
+    {
+        this.Dispose(false);
+    }
+
+    protected virtual void Dispose(bool disposing)
+    {
+        if (!_disposed)
+        {
+            if (disposing)
+            {
+                if (_resource != null)
+                    _resource.Dispose();
+                Console.WriteLine("Ресурс освобожден.");
+            }
+            this._resource = null;
+            this._disposed = true;
         }
     }
 }
