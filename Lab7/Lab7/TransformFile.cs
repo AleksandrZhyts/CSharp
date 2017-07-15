@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using System.Text.RegularExpressions;
 
 namespace Lab7
 {
@@ -26,27 +27,23 @@ class TransformFile : IDisposable
         textForOldFile = textForNewFile = "";
         while ((line = _resource.ReadLine()) != null)
         {
+            string pattern = @"public*";
+            Regex regex = new Regex(pattern, RegexOptions.Multiline | RegexOptions.Compiled | RegexOptions.ExplicitCapture);
+            MatchCollection matchCollection = regex.Matches(line);
+            if (matchCollection.Count > 0) line = regex.Replace(line, "private");
             string[] arrayWords = line.Split(" \t".ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
             string temp = "";
             foreach (string word in arrayWords)
             {
-                if (word.CompareTo("public") == 0)
+                if (word.Length > 2)
                 {
-                    textForOldFile += "private ";
-                    temp  += "private ";
+                    textForOldFile += word.ToLower() + " ";
+                    temp += word.ToLower() + " ";
                 }
                 else
                 {
-                    if (word.Length > 2)
-                    {
-                        textForOldFile += word.ToLower() + " ";
-                        temp += word.ToLower() + " ";
-                    }
-                    else
-                    {
-                        textForOldFile += word + " ";
-                        temp += word + " ";
-                    }
+                    textForOldFile += word + " ";
+                    temp += word + " ";
                 }
             }    
             char[] charArray = temp.ToCharArray();
