@@ -27,7 +27,7 @@ class TransformFile : IDisposable
         textForOldFile = textForNewFile = "";
         while ((line = _resource.ReadLine()) != null)
         {
-            string pattern = @"public*";
+            string pattern = "public";
             Regex regex = new Regex(pattern, RegexOptions.Multiline | RegexOptions.Compiled | RegexOptions.ExplicitCapture);
             MatchCollection matchCollection = regex.Matches(line);
             if (matchCollection.Count > 0) line = regex.Replace(line, "private");
