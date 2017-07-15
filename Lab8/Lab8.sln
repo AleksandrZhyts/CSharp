@@ -5,6 +5,8 @@ VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lab8", "Lab8\Lab8.csproj", "{F2746709-113C-45DB-B802-F2F3BB61B758}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WhetherViewer", "WhetherViewer\WhetherViewer.csproj", "{C108CD4A-B12D-4439-AAD9-621792407C0D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{F2746709-113C-45DB-B802-F2F3BB61B758}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F2746709-113C-45DB-B802-F2F3BB61B758}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F2746709-113C-45DB-B802-F2F3BB61B758}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C108CD4A-B12D-4439-AAD9-621792407C0D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C108CD4A-B12D-4439-AAD9-621792407C0D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C108CD4A-B12D-4439-AAD9-621792407C0D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C108CD4A-B12D-4439-AAD9-621792407C0D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
