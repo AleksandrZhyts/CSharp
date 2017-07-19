@@ -1,0 +1,34 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClassLib", "ClassLib\ClassLib.csproj", "{80C36EDB-7C4A-44E6-8F67-89FE6B833713}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SerializConsolApp", "SerializConsolApp\SerializConsolApp.csproj", "{3DBC7610-7D53-412B-93ED-290B0739C12D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DeserializConsolApp", "DeserializConsolApp\DeserializConsolApp.csproj", "{67791614-0C72-4B1B-9D99-23E9441F6263}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{80C36EDB-7C4A-44E6-8F67-89FE6B833713}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{80C36EDB-7C4A-44E6-8F67-89FE6B833713}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{80C36EDB-7C4A-44E6-8F67-89FE6B833713}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{80C36EDB-7C4A-44E6-8F67-89FE6B833713}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3DBC7610-7D53-412B-93ED-290B0739C12D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3DBC7610-7D53-412B-93ED-290B0739C12D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3DBC7610-7D53-412B-93ED-290B0739C12D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3DBC7610-7D53-412B-93ED-290B0739C12D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{67791614-0C72-4B1B-9D99-23E9441F6263}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{67791614-0C72-4B1B-9D99-23E9441F6263}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{67791614-0C72-4B1B-9D99-23E9441F6263}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{67791614-0C72-4B1B-9D99-23E9441F6263}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
