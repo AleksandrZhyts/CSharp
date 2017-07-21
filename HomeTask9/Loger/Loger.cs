@@ -93,7 +93,7 @@ public class Loger : IDisposable
                     sw.Dispose();
                     _resource.Dispose();
                 }
-                Console.WriteLine("Ресурс освобожден.");
+                //Console.WriteLine("Ресурс освобожден.");
             }
             sw = null;
             this._resource = null;
