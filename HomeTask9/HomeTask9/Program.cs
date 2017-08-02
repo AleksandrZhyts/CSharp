@@ -1,10 +1,7 @@
 ﻿using System;
 using System.IO;
-using System.Collections.Generic;
-using System.Linq;
 using System.Reflection;
 using System.Text;
-using System.Threading.Tasks;
 using Loggin;
 
 /*Задание 1. Программа «Атрибут [ParamsAttribute]»
@@ -27,31 +24,21 @@ class Program
         string SName { get; set; }
     }
 
-    [AttributeUsage(AttributeTargets.Property | AttributeTargets.Class)]  
-    public class IniFileFNameAttribute : Attribute
+    [AttributeUsage(AttributeTargets.Property)]
+    public class IniFileAttribute : Attribute
     {
-        public string IniFile;
+        public string FileName;       
     }
-
-    [AttributeUsage(AttributeTargets.Property | AttributeTargets.Class)]
-    public class IniFileSNameAttribute : Attribute
-    {
-        public string IniFile;
-    }
-
-    [AttributeUsage(AttributeTargets.Property | AttributeTargets.Class)]
-    public class IniFileGroupAttribute : Attribute
-    {
-        public string IniFile;
-    }
-
-    [IniFileFName(IniFile = "ValuesForFName.ini")]
-    [IniFileSName(IniFile = "ValuesForSName.ini")]
-    [IniFileGroup(IniFile = "ValuesForGroupNumber.ini")]
+ 
     class Student : IHuman
     {
+        [IniFile(FileName = "ValuesForFName.ini")]
         public string FName { get; set; }
+
+        [IniFile(FileName = "ValuesForSName.ini")]
         public string SName { get; set; }
+
+        [IniFile(FileName = "ValuesForGroupNumber.ini")]
         public int Group { get; set; }
 
         public Student()
@@ -95,28 +82,27 @@ class Program
     {
         public void Show(IHuman H)
         {
-            Type T = H.GetType();
-            IniFileFNameAttribute FN = (IniFileFNameAttribute)T.GetCustomAttribute(typeof(IniFileFNameAttribute), false);
-            IniFileSNameAttribute SN = (IniFileSNameAttribute)T.GetCustomAttribute(typeof(IniFileSNameAttribute), false);
-            IniFileGroupAttribute Gr = (IniFileGroupAttribute)T.GetCustomAttribute(typeof(IniFileGroupAttribute), false);
+            IniFileAttribute FN = (IniFileAttribute)((Attribute[])typeof(Student).GetProperties()[0].GetCustomAttributes())[0];
+            IniFileAttribute SN = (IniFileAttribute)((Attribute[])typeof(Student).GetProperties()[1].GetCustomAttributes())[0];
+            IniFileAttribute Gr = (IniFileAttribute)((Attribute[])typeof(Student).GetProperties()[2].GetCustomAttributes())[0];
             try
             {
-                FileStream fs = new FileStream("LogFile.log", FileMode.Append, FileAccess.Write, FileShare.ReadWrite);
-                using (Loger writeTo = new Loger(fs, "Log.ini"))
-                {
-                    try
-                    {                       
-                        H.FName = ReadValueFromFile(FN.IniFile); 
-                        H.SName = ReadValueFromFile(SN.IniFile); 
-                        if (H is Student)
-                            (H as Student).Group = Convert.ToInt32(ReadValueFromFile(Gr.IniFile)); 
-                    }
-                    catch (Exception ex)
-                    {
-                        writeTo.Logs("error", ex.Message);
-                    }
+            FileStream fs = new FileStream("LogFile.log", FileMode.Append, FileAccess.Write, FileShare.ReadWrite);
+            using (Loger writeTo = new Loger(fs, "Log.ini"))
+            {
+                try
+                {                       
+                    H.FName = ReadValueFromFile(FN.FileName); 
+                    H.SName = ReadValueFromFile(SN.FileName);
+                    if (H is Student)
+                        (H as Student).Group = Convert.ToInt32(ReadValueFromFile(Gr.FileName)); 
                 }
-                Console.WriteLine(H);
+                catch (Exception ex)
+                {
+                    writeTo.Logs("error", ex.Message);
+                }
+            }
+            Console.WriteLine(H);
             }
             catch 
             {
