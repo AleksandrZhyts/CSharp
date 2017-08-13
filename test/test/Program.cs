@@ -1,52 +1,65 @@
 ﻿using System;
-using System.Text.RegularExpressions;
-
-namespace RegexConsoleExample
+using System.IO;
+using System.Runtime.Serialization;
+using System.Runtime.Serialization.Formatters.Soap;
+using static System.Console;
+namespace SimpleProject
 {
+    [Serializable]
+    public class Person
+    {
+        public string Name { get; set; }
+        public DateTime DateBirth { get; set; }
+        // вызывается во время процесса сериализации
+        [OnSerializing]
+        private void OnSerializing(StreamingContext context)
+        {
+            Name = Name.ToUpper();
+            DateBirth = DateBirth.ToUniversalTime();
+        }
+        // вызывается по завершении процесса десериализации
+        [OnDeserialized]
+        private void OnDeserialized(StreamingContext context)
+        {
+            Name = Name.ToLower();
+            DateBirth = DateBirth.ToLocalTime();
+        }
+        public override string ToString()
+        {
+            return $"Name: {Name}, Date of Birth: { DateBirth}.";
+        }
+    }
     class Program
     {
-
-
         static void Main(string[] args)
         {
-            
-            
-            
-            
-            
-            //while (true)
-            //{
-            //    Console.WriteLine("Введите анализируемый текст:");
-            //    string inputText = Console.ReadLine();
-            //    //Console.WriteLine("Введите регулярное выражение для поиска:");
-            //    string pattern = @"\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*";//Console.ReadLine();
-            //    //Создаем объект регулярного выражения
-            //    Regex regex = new Regex(pattern, RegexOptions.Multiline | RegexOptions.Compiled | RegexOptions.ExplicitCapture);
-            //    //Получаем коллекцию совпадений
-            //    MatchCollection matchCollection = regex.Matches(inputText);
-            //    //Формируем сообщение о найденных совпадениях
-            //    Console.WriteLine("Найдено совпадений: {0}", matchCollection.Count);
-            //    //Выводим информацию о каждом найденном совпадении
-            //    for (int i = 0; i < matchCollection.Count; i++)
-            //    {
-            //        Console.WriteLine("{0}:\t{1}", i + 1, matchCollection[i].Value);
-            //    }
-            //    //Произведем замену всех найденных совпадений
-            //    Console.WriteLine("Вы хотите заменить найденные совпадения новым текстом? y(es) / n(o)");
-            //    string answ = Console.ReadLine();
-            //    if (!String.IsNullOrEmpty(answ) && answ.ToLower().StartsWith("y"))
-            //    {
-            //        //Заменяем все найденные совпадения в тексте
-            //        Console.WriteLine("Введите текст для замены:");
-            //        string replacementText = Console.ReadLine();
-            //        Console.WriteLine("Результат обработки:");
-            //        Console.WriteLine(regex.Replace(inputText, replacementText));
-            //    }
-            //    Console.WriteLine("Продолжить? y(es) / n(o)");
-            //    answ = Console.ReadLine();
-            //    if (String.IsNullOrEmpty(answ) || answ.ToLower().StartsWith("n"))
-            //        break;
-            //}
+            Person person = new Person
+            {
+                Name = "Jack",
+                DateBirth = new DateTime(1995, 11, 5)
+            };
+            SoapFormatter soapFormat = new SoapFormatter();
+            try
+            {
+                using (Stream fStream =
+                File.Create("test.soap"))
+                {
+                    soapFormat.Serialize(fStream, person);
+                }
+                WriteLine("SoapSerialize OK!\n");
+                Person p = null;
+                using (Stream fStream =
+                File.OpenRead("test.soap"))
+                {
+                    p = (Person)soapFormat.
+                    Deserialize(fStream);
+                }
+                WriteLine(p);
+            }
+            catch (Exception ex)
+            {
+                WriteLine(ex);
+            }
         }
     }
 }
